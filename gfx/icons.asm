@@ -1,5 +1,5 @@
 SECTION "Mon Icons 1", ROMX
-
+Icons: ; used only for BANK(Icons)
 NullIcon:
 BulbasaurIcon:    INCBIN "gfx/icons/bulbasaur.2bpp"
 IvysaurIcon:      INCBIN "gfx/icons/ivysaur.2bpp"
