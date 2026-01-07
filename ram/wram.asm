@@ -581,12 +581,7 @@ wLastEnemyMove:: db
 wPlayerFutureSightCount:: db
 wEnemyFutureSightCount:: db
 
-wGivingExperienceToExpShareHolders:: db
-
-wBackupEnemyMonBaseStats:: ds NUM_EXP_STATS
-wBackupEnemyMonCatchRate:: db
-wBackupEnemyMonBaseExp:: db
-
+	ds 8
 wPlayerFutureSightDamage:: dw
 wEnemyFutureSightDamage:: dw
 wPlayerRageCounter:: db
