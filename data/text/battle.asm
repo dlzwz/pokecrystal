@@ -135,7 +135,7 @@ BattleText_MonsReflectFaded:
 	line "REFLECT faded!"
 	prompt
 
-BattleText_RainsContinuesToFall:
+BattleText_RainContinuesToFall:
 	text "Rain continues to"
 	line "fall."
 	prompt
