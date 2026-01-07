@@ -1143,6 +1143,11 @@ _PlayersPCNoRoomDepositText::
 	line "store items."
 	prompt
 
+_CantDepositText::
+	text "Can't deposit"
+	line "this item."
+	prompt
+
 _PokecenterPCTurnOnText::
 	text "<PLAYER> turned on"
 	line "the PC."
