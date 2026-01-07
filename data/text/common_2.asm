@@ -740,44 +740,40 @@ _ActorNameText::
 	text_end
 
 _UsedMove1Text::
-	text_start
-	line "used @"
+	text " used"
+	line "@"
 	text_end
 
 _UsedMove2Text::
-	text_start
-	line "used @"
+_UsedMove3Text::
+	text " did"
+	line "@"
+	text_end
+
+_UsedMove4Text::
+_UsedMove5Text::
+	text "'s"
+	line "@"
 	text_end
 
 _UsedInsteadText::
-	text "instead,"
-	cont "@"
+	text " instead used"
+	line "@"
 	text_end
 
 _MoveNameText::
 	text_ram wStringBuffer2
 	text_end
 
-	text_end ; unreferenced
-
 _EndUsedMove1Text::
-	text "!"
-	done
-
 _EndUsedMove2Text::
-	text "!"
-	done
-
 _EndUsedMove3Text::
+_EndUsedMove5Text::
 	text "!"
 	done
 
 _EndUsedMove4Text::
-	text "!"
-	done
-
-_EndUsedMove5Text::
-	text "!"
+	text " attack!"
 	done
 
 Text_BreedHuh::
