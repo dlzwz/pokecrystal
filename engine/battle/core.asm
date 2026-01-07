@@ -2163,18 +2163,11 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	ret z
 	ld hl, wEnemyMonBaseExp
 	srl [hl]
-
 	ld a, [wBattleParticipantsNotFainted]
 	push af
 	ld a, d
 	xor %00111111
 	ld [wBattleParticipantsNotFainted], a
-	ld hl, wBackupEnemyMonBaseStats
-	ld de, wEnemyMonBaseStats
-	ld bc, wEnemyMonEnd - wEnemyMonBaseStats
-	call CopyBytes
-	ld a, $1
-	ld [wGivingExperienceToExpShareHolders], a
 	call GiveExperiencePoints
 	pop af
 	ld [wBattleParticipantsNotFainted], a
