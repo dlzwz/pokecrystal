@@ -18,12 +18,24 @@ MACRO para
 	db "<PARA>", \# ; Start a new paragraph
 ENDM
 
+MACRO autopara
+	db "<ATPRA>", \# ; Automatically start a new paragraph
+ENDM
+
 MACRO cont
 	db "<CONT>", \# ; Scroll to the next line
 ENDM
 
+MACRO scroll
+	db "<SCROLL>", \# ; Scroll to the next line, pausing shortly
+ENDM
+
 MACRO done
 	db "<DONE>" ; End a text box
+ENDM
+
+MACRO autodone
+	db "<ATDNE>" ; Automatically ends a text box
 ENDM
 
 MACRO prompt
