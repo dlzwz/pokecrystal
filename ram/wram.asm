@@ -373,6 +373,9 @@ wBattleParticipantsNotFainted::
 ; All bits cleared if the enemy faints.
 	db
 
+wExpShareMessageShown:: db
+wExpSharePartyExpMode:: db
+
 wTypeModifier::
 ; >10: super-effective
 ;  10: normal

@@ -2151,6 +2151,9 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	ld a, [wBattleResult]
 	and BATTLERESULT_BITMASK
 	ld [wBattleResult], a ; WIN
+	xor a
+	ld [wExpShareMessageShown], a
+	ld [wExpSharePartyExpMode], a
 	; Preserve bits of non-fainted participants
 	ld a, [wBattleParticipantsNotFainted]
 	ld d, a
@@ -2168,9 +2171,15 @@ UpdateBattleStateAndExperienceAfterEnemyFaint:
 	ld a, d
 	xor %00111111
 	ld [wBattleParticipantsNotFainted], a
+	xor a
+	ld [wExpShareMessageShown], a
+	ld a, TRUE
+	ld [wExpSharePartyExpMode], a
 	call GiveExperiencePoints
 	pop af
 	ld [wBattleParticipantsNotFainted], a
+	xor a
+	ld [wExpSharePartyExpMode], a
 	ret
 
 StopDangerSound:
@@ -7062,11 +7071,29 @@ GiveExperiencePoints:
 	ld [wStringBuffer2 + 1], a
 	ldh a, [hQuotient + 2]
 	ld [wStringBuffer2], a
+	ld a, [wExpShareToggle]
+	and a
+	jr z, .print_mon_exp
+	ld a, [wExpSharePartyExpMode]
+	and a
+	jr z, .print_mon_exp
+	ld a, [wExpShareMessageShown]
+	and a
+	jr nz, .skip_exp_text
+	ld a, TRUE
+	ld [wExpShareMessageShown], a
+	ld hl, Text_PartyGainedExpPoint
+	call BattleTextbox
+	jr .skip_exp_text
+
+.print_mon_exp
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	call GetNickname
 	ld hl, Text_MonGainedExpPoint
 	call BattleTextbox
+
+.skip_exp_text
 	ld a, [wStringBuffer2 + 1]
 	ldh [hQuotient + 3], a
 	ld a, [wStringBuffer2]
@@ -7329,6 +7356,17 @@ BoostExp:
 
 Text_MonGainedExpPoint:
 	text_far Text_Gained
+	text_asm
+	ld hl, ExpPointsText
+	ld a, [wStringBuffer2 + 2] ; IsTradedMon
+	and a
+	ret z
+
+	ld hl, BoostedExpPointsText
+	ret
+
+Text_PartyGainedExpPoint:
+	text_far Text_PartyGained
 	text_asm
 	ld hl, ExpPointsText
 	ld a, [wStringBuffer2 + 2] ; IsTradedMon
