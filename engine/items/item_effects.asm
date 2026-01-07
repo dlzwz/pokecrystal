@@ -372,12 +372,7 @@ PokeBallEffect:
 .skip_hp_calc
 	ld b, a
 	ld [wFinalCatchRate], a
-	call Random
-
-	cp b
-	ld a, 0
-	jr z, .catch_without_fail
-	jr nc, .fail_to_catch
+	jr .catch_without_fail
 
 .catch_without_fail
 	ld a, [wEnemyMonSpecies]
