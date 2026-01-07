@@ -99,6 +99,10 @@ Text_Gained::
 	text " gained@"
 	text_end
 
+Text_PartyGained::
+	text "Party gained@"
+	text_end
+
 _BoostedExpPointsText::
 ; BUG: Five-digit experience gain is printed incorrectly (see docs/bugs_and_glitches.md)
 	text_start
