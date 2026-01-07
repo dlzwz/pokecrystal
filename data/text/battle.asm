@@ -135,8 +135,8 @@ BattleText_MonsReflectFaded:
 	line "REFLECT faded!"
 	prompt
 
-BattleText_RainscrollinuesToFall:
-	text "Rain scrollinues to"
+BattleText_RainsContinuesToFall:
+	text "Rain continues to"
 	line "fall."
 	prompt
 
@@ -935,20 +935,20 @@ DraggedOutText:
 	line "was dragged out!"
 	prompt
 
-autoparalyzedText:
+ParalyzedText:
 	text "<TARGET>'s"
-	line "autoparalyzed! Maybe"
+	line "paralyzed! Maybe"
 	scroll "it can't attack!"
 	prompt
 
-FullyautoparalyzedText:
+FullyParalyzedText:
 	text "<USER>'s"
-	line "fully autoparalyzed!"
+	line "fully paralyzed!"
 	prompt
 
-AlreadyautoparalyzedText:
+AlreadyParalyzedText:
 	text "<TARGET>'s"
-	line "already autoparalyzed!"
+	line "already paralyzed!"
 	prompt
 
 ProtectedByText:
