@@ -232,7 +232,7 @@ SavedTheGame:
 	ld a, [wOptions]
 	push af
 	; set text speed to fast
-+	ld a, TEXT_DELAY_FAST
+	ld a, TEXT_DELAY_FAST
 	ld [wOptions], a
 	; <PLAYER> saved the game!
 	ld hl, SavedTheGameText
