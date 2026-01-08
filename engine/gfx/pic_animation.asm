@@ -615,9 +615,6 @@ PokeAnim_ConvertAndApplyBitmask:
 	add [hl]
 	pop hl
 	ld [hl], a
-	cp $7f
-	ret c
-	inc [hl]
 	ret
 
 .GetCoord:
