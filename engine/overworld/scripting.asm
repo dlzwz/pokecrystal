@@ -2385,7 +2385,7 @@ AppendTMHMMoveName::
 ; hl = item name buffer
 	pop hl
 ; append wStringBuffer1 to item name buffer
-	ld [hl], " "
+	ld [hl], ' '
 	inc hl
 	ld de, wStringBuffer1
 	jp CopyName2
