@@ -15,4 +15,7 @@ MetronomeExcepts:
 	db SLEEP_TALK
 	db SNORE
 	db THIEF
+	db DREAM_EATER
+	db EXPLOSION
+	db SELFDESTRUCT
 	db -1
