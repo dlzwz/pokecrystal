@@ -77,12 +77,13 @@ rept 4
 	add hl, de
 endr
 
-	ld a, [wTimeOfDay]
-	maskbits NUM_DAYTIMES
-	cp NITE_F
-	jr c, .time_species
+	; Randomize day/night for fishing (allows catching all Pokemon any time)
+	call Random
+	and %00000001              ; Random 0-1 (day or night)
+	cp 1
+	jr c, .time_species        ; If 0 (day), use first entry
 	inc hl
-	inc hl
+	inc hl                     ; If 1 (night), skip to second entry
 
 .time_species
 	ld d, [hl]

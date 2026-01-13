@@ -263,7 +263,13 @@ ChooseWildEncounter:
 	jr z, .watermon
 	inc hl
 	inc hl
-	ld a, [wTimeOfDay]
+	; Randomize time of day for encounters (allows catching all Pokemon any time)
+	call Random
+	and %00000011              ; Random 0-3
+	cp 3
+	jr c, .valid_time_grass    ; If 0-2, use it
+	xor a                      ; If 3, default to 0 (morning)
+.valid_time_grass
 	ld bc, NUM_GRASSMON * 2
 	call AddNTimes
 	ld de, GrassMonProbTable
