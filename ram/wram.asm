@@ -147,6 +147,8 @@ wLinkMode::
 
 wScriptVar:: db
 
+wWildMonTimeOfDay:: db ; Randomized time of day for wild encounters (0=not set, 1-3=morn/day/nite)
+
 wPlayerNextMovement:: db
 wPlayerMovement:: db
 

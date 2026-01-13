@@ -270,11 +270,20 @@ ChooseWildEncounter:
 	jr c, .valid_time_grass    ; If 0-2, use it
 	xor a                      ; If 3, default to 0 (morning)
 .valid_time_grass
+	push af                    ; Save time value (0-2) for pointer calculation
+	inc a                      ; Convert to 1-3 for storage (0 = sentinel for "not set")
+	ld [wWildMonTimeOfDay], a  ; Store randomized time for caught data
+	pop af                     ; Restore time value (0-2)
 	ld bc, NUM_GRASSMON * 2
 	call AddNTimes
 	ld de, GrassMonProbTable
+	jr .encounter_selected
 
 .watermon
+	; Water encounters don't have time variation, use actual time
+	xor a                       ; Store 0 = use actual time
+	ld [wWildMonTimeOfDay], a
+.encounter_selected
 ; hl contains the pointer to the wild mon data, let's save that to the stack
 	push hl
 .randomloop

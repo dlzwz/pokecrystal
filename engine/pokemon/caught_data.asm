@@ -166,7 +166,18 @@ SetCaughtData:
 	ld hl, wPartyMon1CaughtLevel
 	call GetPartyLocation
 SetBoxmonOrEggmonCaughtData:
+	; Check if we have a randomized encounter time stored (1-3)
+	ld a, [wWildMonTimeOfDay]
+	and a
+	jr z, .use_actual_time     ; 0 means not set, use actual time
+
+	; Use randomized encounter time from wild battle (stored as 1-3, convert to 0-2)
+	dec a
+	jr .got_time
+
+.use_actual_time
 	ld a, [wTimeOfDay]
+.got_time
 	inc a
 	rrca
 	rrca
@@ -196,6 +207,9 @@ SetBoxmonOrEggmonCaughtData:
 	rrca ; shift bit 0 (PLAYERGENDER_FEMALE_F) to bit 7 (CAUGHT_GENDER_MASK)
 	or b
 	ld [hl], a
+	; Clear the temporary time value after use (reset to 0 = not set)
+	xor a
+	ld [wWildMonTimeOfDay], a
 	ret
 
 SetBoxMonCaughtData:
