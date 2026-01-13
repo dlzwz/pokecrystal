@@ -19,7 +19,18 @@ BattleCommand_Metronome:
 	cp NUM_ATTACKS + 1
 	jr nc, .GetMove
 
+; Only allow attacking moves (power > 0).
+	ld b, a                    ; Store move ID in b
+	push bc
+	dec a                      ; Move IDs are 1-indexed, adjust to 0-indexed
+	ld hl, Moves + MOVE_POWER  ; Point to MOVE_POWER offset in Moves table
+	call GetMoveAttr           ; Get power value for move a
+	and a                      ; Check if power is 0
+	pop bc
+	jr z, .GetMove             ; If power = 0 (status move), re-roll
+
 ; None of the moves in MetronomeExcepts.
+	ld a, b                    ; Restore move ID from b
 	push af
 	ld de, 1
 	ld hl, MetronomeExcepts
