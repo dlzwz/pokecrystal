@@ -20,12 +20,6 @@ Route40_MapScripts:
 
 Route40MonicaCallback:
 	clearevent EVENT_BATTLE_TOWER_OPEN_CIVILIANS
-	readvar VAR_WEEKDAY
-	ifequal MONDAY, .MonicaAppears
-	disappear ROUTE40_MONICA
-	endcallback
-
-.MonicaAppears:
 	appear ROUTE40_MONICA
 	endcallback
 
@@ -94,9 +88,7 @@ MonicaScript:
 	faceplayer
 	opentext
 	checkevent EVENT_GOT_SHARP_BEAK_FROM_MONICA
-	iftrue .Monday
-	readvar VAR_WEEKDAY
-	ifnotequal MONDAY, .NotMonday
+	iftrue .AlreadyGotGift
 	checkevent EVENT_MET_MONICA_OF_MONDAY
 	iftrue .MetMonica
 	writetext MeetMonicaText
@@ -113,16 +105,10 @@ MonicaScript:
 	closetext
 	end
 
-.Monday:
+.AlreadyGotGift:
 	writetext MonicaMondayText
 	waitbutton
 .done:
-	closetext
-	end
-
-.NotMonday:
-	writetext MonicaNotMondayText
-	waitbutton
 	closetext
 	end
 
