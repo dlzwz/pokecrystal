@@ -19,7 +19,6 @@ LakeOfRage_MapScripts:
 
 	def_callbacks
 	callback MAPCALLBACK_NEWMAP, LakeOfRageFlypointCallback
-	callback MAPCALLBACK_OBJECTS, LakeOfRageWesleyCallback
 
 LakeOfRageNoop1Scene:
 	end
@@ -29,16 +28,6 @@ LakeOfRageNoop2Scene:
 
 LakeOfRageFlypointCallback:
 	setflag ENGINE_FLYPOINT_LAKE_OF_RAGE
-	endcallback
-
-LakeOfRageWesleyCallback:
-	readvar VAR_WEEKDAY
-	ifequal WEDNESDAY, .WesleyAppears
-	disappear LAKEOFRAGE_WESLEY
-	endcallback
-
-.WesleyAppears:
-	appear LAKEOFRAGE_WESLEY
 	endcallback
 
 LakeOfRageLanceScript:
@@ -191,9 +180,7 @@ WesleyScript:
 	faceplayer
 	opentext
 	checkevent EVENT_GOT_BLACKBELT_FROM_WESLEY
-	iftrue WesleyWednesdayScript
-	readvar VAR_WEEKDAY
-	ifnotequal WEDNESDAY, WesleyNotWednesdayScript
+	iftrue .AlreadyGotGift
 	checkevent EVENT_MET_WESLEY_OF_WEDNESDAY
 	iftrue .MetWesley
 	writetext MeetWesleyText
@@ -203,22 +190,16 @@ WesleyScript:
 	writetext WesleyGivesGiftText
 	promptbutton
 	verbosegiveitem BLACKBELT_I
-	iffalse WesleyDoneScript
+	iffalse .Done
 	setevent EVENT_GOT_BLACKBELT_FROM_WESLEY
 	writetext WesleyGaveGiftText
 	waitbutton
+.Done:
 	closetext
 	end
 
-WesleyWednesdayScript:
+.AlreadyGotGift:
 	writetext WesleyWednesdayText
-	waitbutton
-WesleyDoneScript:
-	closetext
-	end
-
-WesleyNotWednesdayScript:
-	writetext WesleyNotWednesdayText
 	waitbutton
 	closetext
 	end
@@ -472,12 +453,6 @@ WesleyWednesdayText:
 
 	para "Or did you just"
 	line "get lucky?"
-	done
-
-WesleyNotWednesdayText:
-	text "WESLEY: Today's"
-	line "not Wednesday."
-	cont "That's too bad."
 	done
 
 LakeOfRageSignText:
